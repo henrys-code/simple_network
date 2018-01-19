@@ -1,8 +1,13 @@
-CC=gcc
+CC= gcc
 CFlags= -pthread
+DEPS= Receiver.h Sender.h
+OBJ= main.o Sender.o Receiver.o
 
-test: main.o
-	$(CC) $(CFlags) -o test main.o
+%.o:%.c $(DEPS)
+		$(CC) -c -o $@ $< $(CFLAGS)
+
+test: $(OBJ)
+	$(CC) -o $@ $^ $(CFlags)
 
 clean:
 	rm -f ./*.o test
